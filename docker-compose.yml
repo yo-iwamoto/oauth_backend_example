@@ -1,0 +1,16 @@
+version: '3'
+
+volumes:
+  postgres:
+
+services:
+  db:
+    image: postgres:12
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_DEV_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DEV_DATABASE}
+      - POSTGRES_USER=${POSTGRES_DEV_USER}
+    ports:
+      - ${POSTGRES_DEV_PORT}:5432

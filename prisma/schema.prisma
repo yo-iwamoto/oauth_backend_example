@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt
+
+  userId       String       @unique @map("user_id")
+  displayId    String       @unique @map("display_id")
+  authProvider AuthProvider @map("auth_provider")
+  imageUrl     String
+  name         String
+  email        String
+
+  @@map("users")
+}
+
+enum AuthProvider {
+  github
+  google
+}
